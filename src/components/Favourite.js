@@ -9,7 +9,7 @@ import {
   query,
   where,
   updateDoc, deleteDoc, doc
-} from "firebase/firestore/lite";
+} from "firebase/firestore";
 import {onSnapshot,orderBy,getFirestore} from "firebase/firestore";
 import profileblue from "../images/Profileblue.svg";
 import Navbar from './Navbar.js';

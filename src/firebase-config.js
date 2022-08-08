@@ -16,7 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
-import {getFirestore} from "firebase/firestore/lite";
+import {getFirestore} from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyDDQ8zSkslXsoYQ8H0_SkoUgfWBU1xI1CI",
   authDomain: "musicapp-29733.firebaseapp.com",

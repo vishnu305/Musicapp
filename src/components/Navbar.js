@@ -18,7 +18,7 @@ import {
     query,
     where,
     updateDoc, deleteDoc, doc
-  } from "firebase/firestore/lite";
+  } from "firebase/firestore";
 import profile from "../images/Profile.svg";
 import {IconContext} from 'react-icons';
 import $ from "jquery";
@@ -37,7 +37,7 @@ function Navbar({title}){
     
     
     
-    const [name, setName] = useState([]);
+    const [name, setName] = useState("");
     const [firstname,setfirstnametoshow]=useState("");
     const [profileimg,setprofileimg] = useState(profile);
     const [user, loading, error] = useAuthState(auth);
@@ -82,6 +82,7 @@ function Navbar({title}){
         fetchUserNameSongs();
         }
     }, [name]);
+   
 
     return (<Container>
         <IconContext.Provider value={{color:'#fff'}}>
