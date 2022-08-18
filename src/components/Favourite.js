@@ -82,7 +82,7 @@ function Favourite(){
             </audio>
         </div>
         )} */}
-        <Navbar title="2"/>
+        <Navbar title="3"/>
         <Content>
         <h1>Favourite songs page</h1>
         </Content>
@@ -93,8 +93,8 @@ function Favourite(){
 export default Favourite;
 
 const Container = styled.div`
-    width:98.5vw;
-    height:100vh;
+    width:99vw;
+    // height:100vh;
 `;
 
 const Content = styled.div`

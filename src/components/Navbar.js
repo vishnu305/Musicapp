@@ -24,6 +24,13 @@ import {IconContext} from 'react-icons';
 import $ from "jquery";
 import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 function Navbar({title}){
     const [sidebar, setSidebar]=useState(true);
     const showSidebar = () => setSidebar(!sidebar);
@@ -34,7 +41,21 @@ function Navbar({title}){
             setSidebar(false);
         }
     },[width])
-    
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+    const handleClose1 = () => {
+        setOpen(false);
+        logout();
+    };
+        
     
     
     const [name, setName] = useState("");
@@ -82,6 +103,20 @@ function Navbar({title}){
         fetchUserNameSongs();
         }
     }, [name]);
+
+    const changeiconprof = (vi) => {
+        if (vi == 1) {
+          const list = document.querySelector(".submenulist");
+          if (list) {
+            list.classList.remove("hidden3");
+          }
+        } else {
+          const list = document.querySelector(".submenulist");
+          if (list) {
+            list.classList.add("hidden3");
+          }
+        }
+      };
    
 
     return (<Container>
@@ -91,19 +126,33 @@ function Navbar({title}){
                 <FaIcons.FaBars onClick={showSidebar}/>
             </Link>
             <h1 style={{color:"#fff"}}><MusicNoteIcon/>Music App</h1>
-                <div style={{display:'flex',alignItems:'center'}}>
-                <h3 style={{color:"#fff"}}>Welcome {firstname}</h3>
-                <img
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "20px",
-                      marginRight: "10px",
-                      marginLeft:"10px"
-                    }}
-                    src={profileimg}
-                    alt='profileimg'
-                  />
+                <div style={{display:'flex',alignItems:'center'}} 
+                onMouseEnter={() => {
+                    changeiconprof(1);
+                  }}
+                  onMouseLeave={() => {
+                    changeiconprof(2);
+                  }}>
+                    <h3 style={{color:"#fff"}}>Welcome {firstname}</h3>
+                    <img
+                        style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "20px",
+                        marginRight: "10px",
+                        marginLeft:"10px"
+                        }}
+                        src={profileimg}
+                        alt='profileimg'
+                    />
+                    <ul className="submenulist hidden3">
+                        <li>Settings</li>
+                        <li
+                        onClick={handleClickOpen}
+                        >
+                        Logout
+                        </li>
+                    </ul>
                 </div>
         </div>
         <nav className={sidebar ? 'nav-menu active':'nav-menu'}>
@@ -114,6 +163,7 @@ function Navbar({title}){
                     </Link>
                 </li>
                 <br/>
+                <div className="navitemsscroll">
                 {Sidebar.map((item,index)=>{
                     if(index==title){
                     return (
@@ -127,6 +177,7 @@ function Navbar({title}){
                     }
                     else{
                         return (
+                            
                             <li key={index} className={item.cName}>
                                 <Link to={item.path} >
                                     {item.icon}
@@ -136,14 +187,37 @@ function Navbar({title}){
                         ) 
                     }
                 })}
-                <li className="logoutcss" onClick={logout} style={{color:"#f5f5f5"}} >
+                
+                <li className="logoutcss" onClick={handleClickOpen} style={{color:"#f5f5f5"}} >
                     <div>
                     <MdIcons.MdLogout/>
                     <span>Logout</span>
                     </div>
                 </li>
+                </div>
             </ul>
         </nav>
+        <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Do you want to Logout from Musicapp?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Yes will logout from the Musicapp
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>No</Button>
+          <Button onClick={handleClose1} autoFocus>
+            Yes
+          </Button>
+        </DialogActions>
+      </Dialog>
         </IconContext.Provider>
     </Container>);
 }
@@ -152,6 +226,7 @@ export default Navbar;
 
 const Container = styled.div`
     font-family:'Lato',sans-serif;
+    z-index:10000;
     .navbar1{
         background-color:#060b26;
         height:80px;
@@ -162,7 +237,32 @@ const Container = styled.div`
         position:fixed;
         top:0px;
         right:0px;
+        z-index:10000;
     }
+    .submenulist {
+        position: absolute;
+        top: 50px;
+        right: 40px;
+        list-style: none;
+        li {
+          background-color: #060b26;
+          color: white;
+          padding: 3px 40px;
+          // border-radius: 5px;
+          border: 1px solid white;
+          transition: 0.3s ease-out;
+          cursor: pointer;
+          font-size:20px;
+        }
+        li:hover {
+          background-color: white;
+          color: #060b26;
+          border: 1px solid #060b26;
+        }
+      }
+      .hidden3 {
+        display: none;
+      }
 
     .menu-bars{
         margin-left:2.5rem;
@@ -181,6 +281,12 @@ const Container = styled.div`
         left: -100%;
         transition: 850ms;
     }
+    .navitemsscroll{
+        height:63vh;
+         overflow-y: scroll;
+    }
+    
+    
     .nav-menu.active{
         left:0;
         transition:350ms;
@@ -189,7 +295,7 @@ const Container = styled.div`
         display:flex;
         justify-content:start;
         align-items:center;
-        padding:8px 0px 8px 8px;
+        padding:4px 0px 4px 4px;
         list-style:none;
         height: 60px;
     }
@@ -234,6 +340,7 @@ const Container = styled.div`
         width:100%;
         padding-left:10px;
     }
+    
     .navbar-toggle{
         background-color:#060b26;
         width:100%;

@@ -330,7 +330,7 @@ export default Welcome;
 const Container = styled.div`
 text-align:center;
 background: linear-gradient(to right,#ff512f , #dd2476);
-width:98.9vw;
+width:100vw;
 `;
 
 const Homesection = styled.div`

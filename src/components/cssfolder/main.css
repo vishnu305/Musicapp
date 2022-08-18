@@ -175,6 +175,8 @@ header h3 {
   flex: 1 1;
   padding: 0;
   width: 70vw;
+  height:70vh;
+  overflow-y: scroll;
 }
 
 .loi li {

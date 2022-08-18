@@ -13,8 +13,14 @@ export const Sidebar = [
         cName: 'nav-text'
     },
     {
-        title:'Search',
-        path:'/dashboard/search',
+        title:'Search Songs',
+        path:'/dashboard/searchlyrics',
+        icon: <AiIcons.AiOutlineSearch/>,
+        cName: 'nav-text'
+    },
+    {
+        title:'Search Lyrics',
+        path:'/dashboard/searchlyrics',
         icon: <AiIcons.AiOutlineSearch/>,
         cName: 'nav-text'
     },
@@ -35,5 +41,6 @@ export const Sidebar = [
         path:'/dashboard',
         icon: <MdIcons.MdOutlineLocalLaundryService/>,
         cName: 'nav-text'
-    }
+    },
+    
 ]

@@ -8,10 +8,13 @@ import Dashboard from './components/Dashboard.js';
 import Searchpage from './components/Searchpage.js';
 import Favourite from './components/Favourite.js';
 import PlayerState from './components/PlayerState.js';
+import { ContextController } from "./context";
+import Lyrics from './components/Lyrics.js';
 
 function App() {
   return (
     <div>
+      <ContextController>
       <Router>
         <Routes>
           <Route exact path='/' element={<Welcome/>}>
@@ -22,13 +25,16 @@ function App() {
           </Route>
           <Route exact path='/dashboard' element={<PlayerState><Dashboard/></PlayerState>}>
           </Route>
-          <Route exact path='/dashboard/search' element={<Searchpage/>}>
+          <Route exact path='/dashboard/searchlyrics' element={<Searchpage/>}>
           </Route>
           <Route exact path='/dashboard/favourite' element={<Favourite/>}>
           </Route>
+          {/* <Route exact path="/lyrics/track/:id" element={<Lyrics/>} /> */}
+          <Route exact path="/lyrics/track/:id" element={<Lyrics/>} >
+          </Route>  
         </Routes>
       </Router>
-     
+      </ContextController>
     </div>
   );
 }

@@ -116,6 +116,7 @@ function Dashboard(){
         </div>
         <Controls/>
         </Content>
+        
     
     </Container>);
 }
@@ -124,7 +125,7 @@ export default Dashboard;
 
 const Container = styled.div`
     width:98.5vw;
-    height:100vh;
+    // height:100vh;
 `;
 
 const Content = styled.div`
@@ -132,6 +133,8 @@ const Content = styled.div`
     .content1{
         margin:30px;
         margin-top:100px;
+        margin-bottom:0px;
+        // height:80vh;
     }
     @media screen and (max-width: 850px) {
         margin-left:0px;
